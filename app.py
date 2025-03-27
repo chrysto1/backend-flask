@@ -63,6 +63,7 @@ def login_required(f):
 
 # Rota de autenticação
 @app.route("/login", methods=['GET', 'POST'])
+@login_required
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
@@ -107,8 +108,18 @@ def login():
         
 # Rota de navegação inicial
 @app.route('/')
+@login_required
 def home():
-    return render_template('main.html')
+    username = session.get('username', 'Visitante')
+    return render_template('main.html', username=username)
+
+# Rota de navegação de logout
+@app.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    session.clear()
+    flash('Você saiu do sistema', 'success')
+    return redirect(url_for('login'))
 
 # Rota de navegação de cadastro
 @app.route('/n-cadastro')
@@ -116,9 +127,9 @@ def n_cadastro():
     return render_template('index.html')
 
 # Rota de navegação de login
-@app.route('/n-login', methods=['GET'])
-def n_login():
-    return render_template('login.html')
+# @app.route('/n-login', methods=['GET'])
+# def n_login():
+#     return render_template('login.html')
 
 # Rota de navegação consulta clientes/inicio
 @app.route('/n_consulta-clientes', methods=['GET'])
