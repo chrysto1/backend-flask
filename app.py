@@ -79,6 +79,7 @@ def login():
             flash('Erro ao conectar ao banco de dados.', 'error')
             return redirect(url_for('login.html'))
         
+        # Tratamento de exceções
         try:
             with conn.cursor() as cursor:
                 cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
