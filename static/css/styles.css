@@ -1,0 +1,695 @@
+/* Cores CSS */
+:root {
+  --purple: #3f0d6a;
+  --dark-gray: #333;
+  --medium-gray: #666;
+  --light-gray: #f5f5f5;
+  --border-gray: #ddd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: var(--dark-gray);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ESTILOS HEADER */
+.top-bar {
+  background-color: var(--purple);
+  padding: 8px 0;
+}
+
+.top-links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-links a {
+  color: white;
+  text-decoration: none;
+  padding: 0 15px;
+  font-size: 14px;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.top-links a:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo img {
+  margin-left: 42px;
+  height: 60px;
+}
+
+.main-nav {
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.main-nav li {
+  margin-right: 15px;
+  position: relative;
+}
+
+.main-nav a {
+  color: var(--purple);
+  text-decoration: none;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.main-nav a i {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.search-social {
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  margin-right: 48px;
+}
+
+.social-icons a {
+  margin-left: 10px;
+  color: var(--purple);
+  font-size: 18px;
+}
+
+/* Estilos Banner e Busca Integrados */
+.banner {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.slider-container {
+  background-color: transparent;
+  padding: 0;
+  /* width: 100%; */
+  position: relative;
+}
+
+/* .slide-content {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+} */
+
+.slide {
+  display: none;
+  animation: fadeEffect 1.2s;
+  height: 500px;
+  width: 100%;
+}
+
+.banner-image {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* display: block; */
+}
+
+.slide.active {
+  display: block;
+}
+
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #421068; /* Laranja para o ponto ativo */
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 25px; /* Arredondado como na referência */
+  appearance: none;
+  background-color: white;
+  font-size: 16px;
+  color: #555;
+}
+
+.select-wrapper i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #555;
+}
+
+
+/* Animação de fade para os slides */
+@keyframes fadeEffect {
+  from {opacity: 0.7;}
+  to {opacity: 1;}
+}
+
+/* Estilos da caixa de pesquisa */
+.search-courses {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  background-color: #444;
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-radius: 0 0 8px 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.search-field {
+  flex: 1;
+  margin-right: 15px;
+}
+
+.search-field label {
+  display: block;
+  color: white;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 4px;
+  appearance: none;
+  background-color: white;
+  font-size: 16px;
+}
+
+.select-wrapper i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search-btn {
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-btn:hover {
+  background-color: #802fbb;
+}
+/* Fim do buscar locação */
+
+/* ==================== */
+/* Beneficios da GrandDrive */
+/* =====================  */
+
+.benefits-container {
+  background-color: #f8f9fa;
+  padding: 60px 0;
+  justify-content: center;
+  display: flex;
+}
+
+.benefit-card {
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+}
+
+.benefit-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-title{
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-text{
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Estilo para os logos das empresas parceiras */
+.logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.partner-logo {
+  height: 25px;
+  object-fit: contain;
+}
+
+/* Estilo para os icones do perfil */
+.user-profiles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 0 -5px;
+  border: 2px solid white;
+}
+
+/* Estilo para as estrelas de avaliação */
+.ratings {
+  font-size: 24px;
+  color: #FFD700;
+}
+
+
+/* Estilos do footer */
+
+.footer-area {
+  background: #100f0f;
+}
+
+.footer-area .footer-logo {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.footer-area .footer-pera p {
+  color: #a8a8a8;
+  font-size: 15px;
+  margin-bottom: 50px;
+  line-height: 1.8;
+}
+
+.footer-area .footer-pera.footer-pera2 p {
+  padding: 0;
+}
+
+/* ========================
+ Footer Bottom Section
+======================== */
+.footer-bottom-area {
+  background: #100f0f;
+}
+
+.footer-bottom-area .footer-border {
+  border-top: 1px solid #242323;
+  padding: 40px 0px 23px;
+}
+
+.title-footer {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  .footer-bottom-area .footer-border {
+      padding: 35px 0px 20px;
+  }
+}
+
+.footer-bottom-area .footer-copy-right p {
+  color: #838383;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 2;
+  margin-bottom: 12px;
+}
+
+.footer-bottom-area .footer-copy-right p i {
+  color: #0078ff;
+}
+
+.footer-bottom-area .footer-copy-right p a {
+  color: #0078ff;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-bottom-area .footer-copy-right p a:hover {
+  color: #fff;
+}
+
+/* ========================
+ Footer Menu
+======================== */
+.footer-menu ul {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.footer-menu ul li {
+  display: inline-block;
+  margin-left: 36px;
+}
+
+.footer-menu ul li:first-child {
+  margin-left: 0;
+}
+
+@media (max-width: 767px) {
+  .footer-menu ul li {
+      margin-left: 17px;
+  }
+}
+
+.footer-menu ul li a {
+  color: #777777;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-menu ul li a:hover {
+  color: #0078ff;
+}
+
+/* Responsividade */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .footer-menu {
+      float: left;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .footer-menu {
+      float: left;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-menu {
+      float: left;
+  }
+}
+
+
+@media screen and (max-width: 576px) {
+  .courses-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .top-links {
+      display: none;
+  }
+  
+  .banner-content h2 {
+      font-size: 24px;
+  }
+}
+
+/* static/css/consulta.css */
+.consulta-section {
+  padding: 40px 0;
+}
+
+.consulta-section h1 {
+  color: var(--dark-gray);
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.message {
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  text-align: left;
+  padding: 12px 15px;
+  border: 1px solid var(--border-gray);
+  font-weight: bold;
+}
+
+table td {
+  padding: 10px 15px;
+  border: 1px solid var(--border-gray);
+}
+
+table tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+.empty-result {
+  text-align: center;
+  color: var(--medium-gray);
+}
+
+.actions {
+  text-align: center;
+}
+
+.back-btn {
+  display: inline-block;
+  background-color: var(--purple);
+  color: white;
+  text-decoration: none;
+  padding: 10px 30px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.back-btn:hover {
+  background-color: #802fbb;
+}
+
+/* ========================
+LOGIN
+======================== */
+
+/* From Uiverse.io by akshat-patel28 */ 
+.form-container {
+  width: 350px;
+  height: 500px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 30px;
+}
+
+.title {
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 10px 0 30px 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.input {
+  border-radius: 20px;
+  border: 1px solid #c0c0c0;
+  outline: 0 !important;
+  box-sizing: border-box;
+  padding: 12px 15px;
+}
+
+.page-link {
+  text-decoration: underline;
+  margin: 0;
+  text-align: end;
+  color: #747474;
+  text-decoration-color: #747474;
+}
+
+.page-link-label {
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.page-link-label:hover {
+  color: #000;
+}
+
+.form-btn {
+  padding: 10px 15px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-radius: 20px;
+  border: 0 !important;
+  outline: 0 !important;
+  background: teal;
+  color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.form-btn:active {
+  box-shadow: none;
+}
+
+.sign-up-label {
+  margin: 0;
+  font-size: 10px;
+  color: #747474;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.sign-up-link {
+  margin-left: 1px;
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-color: teal;
+  color: teal;
+  cursor: pointer;
+  font-weight: 800;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.apple-login-button,
+    .google-login-button {
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 11px;
+  gap: 5px;
+}
+
+.apple-login-button {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+}
+
+.google-login-button {
+  border: 2px solid #747474;
+}
+
+.apple-icon,
+    .google-icon {
+  font-size: 18px;
+  margin-bottom: 1px;
+}

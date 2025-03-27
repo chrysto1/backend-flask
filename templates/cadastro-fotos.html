@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <H1> MATRÍCULA DE ALUNO</H1>
+    
+    
+        <form id="cadastroForm" method="POST" action="/cadastro_foto" enctype="multipart/form-data">
+    
+           <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite seu nome" name="nome">
+    
+            <label for="exampleFormControlInput1" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite seu cpf" name="cpf">
+    
+            <label for="exampleFormControlInput1" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a matrícula" name="matricula">
+    
+            <label for="exampleFormControlInput1" class="form-label">Cidade</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a cidade" name="cidade">
+    
+            <label for="exampleFormControlInput1" class="form-label">Estado</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o estado" name="estado">
+         
+            <label class="input-group-text" for="inputGroupFile01">Upload</label>
+            <input type="file" class="form-control" id="inputGroupFile01" name="foto" accept="image/*" required>
+          </div>
+         
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+         
+         
+        </form>
+        <br>
+        <form method="GET" action="/">
+            <button type="submit" class="btn btn-primary">Voltar</button>
+        </form>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de clientes</title>
+
+</head>
+<body>
+    <h1>Pesquisa de clientes</h1>
+
+<form action="/filter" method="POST">
+    Digite o nome do cliente: <input type="text" name="filter_input" id="filter_input">
+    <button type="submit">Pesquisar cliente</button> <br>
+</form>
+
+<!-- {% if finders %}
+<table class="table"> -->
+
+    <!--Primeira linha-->  
+    <!-- <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+        <th scope="col">Data de nascimento</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead> -->
+
+    <br> <br>
+
+    Nome: <input type="text" id="clientname" value="">
+    Sobrenome: <input type="text" id="surname" value=""> <br>
+    CPF: <input type="text" id="cpf" value="">
+    Data de nascimento: <input type="text" id="birth" value=""> <br>
+    Cidade: <input type="text" id="city" value="">
+    Estado: <input type="text" id="country" value="">
+
+    <!--Segunda linha-->  
+    <tbody>
+    {% for finder in finders %}
+    <!-- <tr>
+        <th scope="row">{{ finder[0] }}</th>
+        <td>{{ finder[1] }}</td>
+        <td>{{ finder[2] }}</td>
+        <td>{{ finder[3] }}</td>
+        <td>{{ finder[4] }}</td>
+        <td>{{ finder[5] }}</td> 
+    </tr> -->
+    <script>
+        document.getElementById('clientname').value = "{{ finder[1] }}";
+        document.getElementById('surname').value = "{{ finder[2] }}";
+        document.getElementById('cpf').value = "{{ finder[3] }}";
+        document.getElementById('birth').value = "{{ finder[4] }}";
+        document.getElementById('city').value = "{{ finder[5] }}";
+        document.getElementById('country').value = "{{ finder[6] }}";
+    </script>
+    
+    {% endfor %}
+           
+    </tbody>
+  </table>
+{% endif %}
+
+<script>
+    document.getElementById('filter_input').reset();
+
+</script>
+
+</body>
+</html>
