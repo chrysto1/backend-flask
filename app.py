@@ -26,7 +26,7 @@ from flask_wtf.csrf import CSRFProtect #Proteção contra CSRF (Cross-Site Reque
 load_dotenv() #Carregar as variáveis de ambiente do arquivo .env
 
 
-
+# =================== INICIALIZAÇÃO ===================
 app = Flask(__name__)
 
 #Configurações de segurança
@@ -53,65 +53,94 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'logged_in' not in session:
-            flash('Você precisa fazer login para acessar esta página.', 'error')
+            flash('Por favor, faça login para acessar esta página.', 'error')
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
+# Decorator para restrição de acesso
+def role_required(role):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if 'logged_in' not in session or session['role'] != role:
+                flash('Você não tem permissão para acessar esta página.', 'error')
+                return redirect(url_for('home'))
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
 
 
 # ================= ROTAS DE NAVEGAÇÃO ====================
 
 # Rota de autenticação
 @app.route("/login", methods=['GET', 'POST'])
-@login_required
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Tratamento para verificar se usuário digitou todos os campos
         if not username or not password:
-            flash('Por favor, preencha todos os campos.', 'error') # Mostra mensagem embaixo dos inputs
-            return redirect(url_for('login.html'))
+            flash('Preencha todos os campos.', 'error')
+            return render_template('login.html')
 
-        # Checa se a conexão com o banco de dados foi realizada
         conn = connection_db()
         if not conn:
-            flash('Erro ao conectar ao banco de dados.', 'error')
-            return redirect(url_for('login.html'))
-        
-        # Tratamento de exceções
+            flash('Erro de conexão com o banco de dados.', 'error')
+            return render_template('login.html')
+
         try:
             with conn.cursor() as cursor:
-                cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+                cursor.execute("SELECT id, users, passwords, rolers FROM users WHERE users = %s", (username,))
                 user = cursor.fetchone()
 
-                if user and (user[2], password):
-                    session.permanent = True # Mantém a sessão ativa
-                    session['logged_in'] = True # Cria a sessão de login
-                    session['username'] = user[1] # Cria a sessão do usuário
-                    session['user_id'] = user[0] # Cria a sessão do ID do usuário
-                    flash('Login realizado com sucesso!', 'success') # Mostra mensagem de sucesso
-                    return redirect(url_for('home')) # Redireciona para a página inicial
+                if user and user[2] == password:
+                    session.permanent = True
+                    session['logged_in'] = True
+                    session['username'] = user[1]
+                    session['user_id'] = user[0]
+                    session['role'] = user[3]
+                    flash('Login realizado com sucesso!', 'success')
+                    
+                    # Redirecionamento baseado no papel
+                    if user[3] == 'Administrador':
+                        return redirect(url_for('admin'))
+                    elif user[3] == 'Usuário':
+                        return redirect(url_for('user'))
+                    else:
+                        return redirect(url_for('home'))
                 else:
-                    flash('Usuário ou senha inválidos.', 'error')
-                    return redirect(url_for('login.html')) # Redireciona para a página de login
-                        
+                    print(user)
+                    flash('Usuário ou senha incorretos!', 'error')
         except Exception as e:
-            print(user)
-            flash(f'Erro ao realizar login: {e}', 'error') # Mostra mensagem de erro
-        
+            print(f"Erro na autenticação: {e}")
+            flash('Erro durante a autenticação.', 'error')
         finally:
             if conn:
                 conn.close()
+
     return render_template('login.html')
-        
+
+#Rota só para administradores
+@app.route('/admin')
+@role_required('Administrador')
+def admin():
+    return render_template('admin_dashboard.html')
+
+#Rota só para usuários
+@app.route('/user')
+@role_required('Usuário')
+def user():
+    return render_template('main.html')
+
+
+
 # Rota de navegação inicial
 @app.route('/')
-@login_required
 def home():
     username = session.get('username', 'Visitante')
-    return render_template('main.html', username=username)
+    role = session.get('role', 'Visitante')
+    return render_template('main.html', username=username, role=role)
 
 # Rota de navegação de logout
 @app.route('/logout', methods=['POST'])
@@ -133,11 +162,13 @@ def n_cadastro():
 
 # Rota de navegação consulta clientes/inicio
 @app.route('/n_consulta-clientes', methods=['GET'])
+@login_required
 def n_consulta_clientes():
     return redirect(url_for('paginacao', page=1))
 
 # Rota de navegação de filtro/inicio
 @app.route('/n_filter', methods=['GET'])
+@login_required
 def n_filter():
     return render_template('filter-find.html')
 
@@ -233,6 +264,7 @@ def filtro():
 
 # Rota para a página de paginação
 @app.route("/paginacao", methods=['GET', 'POST'])
+@login_required
 def paginacao():
     page = request.args.get('page', 1, type=int)
     quantidade = 5
@@ -368,7 +400,7 @@ def gerar_pdf():
         return f"Erro ao gerar PDF: {e}", 500
 
 
-# Rota para a página de login
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8085, host='127.0.0.1')

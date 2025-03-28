@@ -1,0 +1,7 @@
+create table users (
+id int generated always as identity primary key,
+users varchar(50) not null unique,
+passwords varchar(255) not null,
+rolers varchar(20) not null default 'Usuário'
+check (rolers in ('Administrador', 'Usuário'))
+)
